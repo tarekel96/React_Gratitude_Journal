@@ -34,7 +34,7 @@ const Wrapper = styled.main`
 	align-items: center;
 	padding-top: 5%;
 	height: 100%;
-	background-color: rgb(89, 89, 89);
+	background-color: rgb(206, 206, 206);
 `;
 
 const GratitudesWrapper = styled.section`
@@ -45,7 +45,8 @@ const GratitudesWrapper = styled.section`
 	align-items: center;
 	gap: 1.5rem;
 	article:nth-child(even) {
-		background-color: rgb(175, 212, 233);
+		background-color: #1f2937;
+		color: rgb(229, 231, 235);
 	}
 `;
 
