@@ -1,7 +1,9 @@
 import styled from 'styled-components';
+import { IconContext } from 'react-icons';
+import { BsTrashFill } from 'react-icons/bs';
 import { useState } from 'react';
 
-export const Form = ({ gratitudeSize, setGratitudes }) => {
+export const Form = ({ gratitudeSize, setGratitudes, clearGratitudes }) => {
 	const [ input, setInput ] = useState('');
 	const handleChange = (e) => setInput(e.target.value);
 	const firstMsg = "Let's get your journey started! Enter your first gratitude!";
@@ -20,8 +22,18 @@ export const Form = ({ gratitudeSize, setGratitudes }) => {
 		setGratitudes((prevLst) => [ newGratitude, ...prevLst ]);
 		setInput('');
 	};
+	const ClearButton = () => {
+		return (
+			<IconContext.Provider value={{ color: 'black', className: 'global-class-name', size: '2rem' }}>
+				<ExitButtonWrapper onClick={() => clearGratitudes()}>
+					<BsTrashFill />
+				</ExitButtonWrapper>
+			</IconContext.Provider>
+		);
+	};
 	return (
 		<FormWrapper onSubmit={(e) => handleSubmit(e)}>
+			<ClearButton />
 			<InputField
 				type="text"
 				name="user-input"
@@ -36,6 +48,16 @@ export const Form = ({ gratitudeSize, setGratitudes }) => {
 };
 
 const FormWrapper = styled.form`display: flex;`;
+
+const ExitButtonWrapper = styled.article`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	svg:hover {
+		fill: red !important;
+		stroke: red !important;
+	}
+`;
 
 const InputField = styled.input`
 	padding: 0.5rem 1rem;

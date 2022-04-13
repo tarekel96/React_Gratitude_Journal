@@ -6,9 +6,10 @@ import { defaultData } from '../data/defaultData';
 
 const Journal = () => {
 	const [ gratitudes, setGratitudes ] = useState(defaultData);
+	const clearGratitudes = () => setGratitudes([]);
 	return (
 		<Wrapper>
-			<Form gratitudeSize={gratitudes.length} setGratitudes={setGratitudes} />
+			<Form gratitudeSize={gratitudes.length} setGratitudes={setGratitudes} clearGratitudes={clearGratitudes} />
 			<GratitudesWrapper>
 				{gratitudes.map((gratitude, index) => (
 					<Gratitude content={gratitude.content} key={gratitude + ' ' + String(index)} />
