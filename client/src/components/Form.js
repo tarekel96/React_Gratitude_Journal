@@ -5,10 +5,14 @@ import { useState } from 'react';
 
 export const Form = ({ gratitudeSize, setGratitudes, clearGratitudes }) => {
 	const [ input, setInput ] = useState('');
-	const handleChange = (e) => setInput(e.target.value);
+
 	const firstMsg = "Let's get your journey started! Enter your first gratitude!";
 	const altMsg = 'Enter a new gratitude to your journal..';
+
 	const placeHolder = gratitudeSize === 0 ? firstMsg : altMsg;
+
+	const handleChange = (e) => setInput(e.target.value);
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (input === '') {
@@ -22,6 +26,7 @@ export const Form = ({ gratitudeSize, setGratitudes, clearGratitudes }) => {
 		setGratitudes((prevLst) => [ newGratitude, ...prevLst ]);
 		setInput('');
 	};
+
 	const ClearButton = () => {
 		return (
 			<IconContext.Provider value={{ color: 'black', className: 'global-class-name', size: '2rem' }}>
@@ -31,6 +36,7 @@ export const Form = ({ gratitudeSize, setGratitudes, clearGratitudes }) => {
 			</IconContext.Provider>
 		);
 	};
+
 	return (
 		<FormWrapper onSubmit={(e) => handleSubmit(e)}>
 			<ClearButton />
@@ -73,4 +79,7 @@ const SubmitButton = styled.input`
 	background-color: rgb(70, 97, 70);
 	border: normal solid rgb(70, 97, 70);
 	font-weight: bold;
+	&:hover {
+		transform: scale(105%);
+	}
 `;

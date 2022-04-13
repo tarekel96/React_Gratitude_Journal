@@ -6,7 +6,15 @@ import { defaultData } from '../data/defaultData';
 
 const Journal = () => {
 	const [ gratitudes, setGratitudes ] = useState(defaultData);
-	const clearGratitudes = () => setGratitudes([]);
+
+	const clearGratitudes = () => {
+		if (gratitudes.length === 0) {
+			alert('There are no gratitudes to clear.');
+			return;
+		}
+		setGratitudes([]);
+	};
+
 	return (
 		<Wrapper>
 			<Form gratitudeSize={gratitudes.length} setGratitudes={setGratitudes} clearGratitudes={clearGratitudes} />
@@ -28,6 +36,7 @@ const Wrapper = styled.main`
 	height: 100%;
 	background-color: rgb(89, 89, 89);
 `;
+
 const GratitudesWrapper = styled.section`
 	width: 85%;
 	padding-top: 2rem;
