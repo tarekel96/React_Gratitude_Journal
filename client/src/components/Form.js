@@ -3,7 +3,13 @@ import { IconContext } from 'react-icons';
 import { BsTrashFill } from 'react-icons/bs';
 import { useState } from 'react';
 
+import { Modal } from './Modal';
+
 export const Form = ({ gratitudeSize, setGratitudes, clearGratitudes }) => {
+	const [ isOpen, toggleModal ] = useState(false);
+	const openModal = () => toggleModal(true);
+	const closeModal = () => toggleModal(false);
+
 	const [ input, setInput ] = useState('');
 
 	const firstMsg = "Let's get your journey started! Enter your first gratitude!";
@@ -30,7 +36,7 @@ export const Form = ({ gratitudeSize, setGratitudes, clearGratitudes }) => {
 	const ClearButton = () => {
 		return (
 			<IconContext.Provider value={{ color: 'black', className: 'global-class-name', size: '2rem' }}>
-				<ExitButtonWrapper onClick={() => clearGratitudes()}>
+				<ExitButtonWrapper onClick={() => openModal()}>
 					<BsTrashFill />
 				</ExitButtonWrapper>
 			</IconContext.Provider>
@@ -40,6 +46,9 @@ export const Form = ({ gratitudeSize, setGratitudes, clearGratitudes }) => {
 	return (
 		<FormWrapper onSubmit={(e) => handleSubmit(e)}>
 			<ClearButton />
+			<Modal isOpen={isOpen} closeModal={closeModal} openModal={openModal} clearGratitudes={clearGratitudes}>
+				Are you sure you want to delete all of the gratitudes?
+			</Modal>
 			<InputField
 				type="text"
 				name="user-input"
@@ -48,7 +57,7 @@ export const Form = ({ gratitudeSize, setGratitudes, clearGratitudes }) => {
 				value={input}
 				onChange={(e) => handleChange(e)}
 			/>
-			<SubmitButton type="submit" name="submit" />
+			<SubmitButton type="submit" name="submit" disabled={input === '' ? true : false} />
 		</FormWrapper>
 	);
 };
@@ -81,5 +90,8 @@ const SubmitButton = styled.input`
 	font-weight: bold;
 	&:hover {
 		transform: scale(105%);
+	}
+	&:disabled {
+		cursor: not-allowed;
 	}
 `;
