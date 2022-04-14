@@ -50,7 +50,7 @@ const ModalWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: flex-end;
+	align-items: center;
 `;
 
 const ModalCloseWrapper = styled.span`
