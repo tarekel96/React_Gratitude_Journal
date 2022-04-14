@@ -7,6 +7,12 @@ import { defaultData } from '../data/defaultData';
 const Journal = () => {
 	const [ gratitudes, setGratitudes ] = useState(defaultData);
 
+	const updateGratitudes = (id, content) => {
+		let copyGratitudes = [ ...gratitudes ];
+		copyGratitudes = copyGratitudes.filter((i) => i.id !== id && i.content !== content);
+		setGratitudes(copyGratitudes);
+	};
+
 	const clearGratitudes = () => {
 		if (gratitudes.length === 0) {
 			alert('There are no gratitudes to clear.');
@@ -20,7 +26,12 @@ const Journal = () => {
 			<Form gratitudeSize={gratitudes.length} setGratitudes={setGratitudes} clearGratitudes={clearGratitudes} />
 			<GratitudesWrapper>
 				{gratitudes.map((gratitude, index) => (
-					<Gratitude content={gratitude.content} key={gratitude + ' ' + String(index)} />
+					<Gratitude
+						id={index}
+						content={gratitude.content}
+						key={gratitude + ' ' + String(gratitude.id)}
+						updateGratitudes={updateGratitudes}
+					/>
 				))}
 			</GratitudesWrapper>
 		</Wrapper>
@@ -34,7 +45,7 @@ const Wrapper = styled.main`
 	align-items: center;
 	padding-top: 5%;
 	height: 100%;
-	background-color: rgb(206, 206, 206);
+	background-color: rgb(240, 182, 89);
 `;
 
 const GratitudesWrapper = styled.section`
@@ -47,6 +58,9 @@ const GratitudesWrapper = styled.section`
 	article:nth-child(even) {
 		background-color: #1f2937;
 		color: rgb(229, 231, 235);
+		span:hover {
+			color: rgb(77, 185, 244);
+		}
 	}
 `;
 

@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { IconContext } from 'react-icons';
-import { BsTrashFill } from 'react-icons/bs';
 import { useState } from 'react';
 
 import { Modal } from './Modal';
@@ -33,22 +31,12 @@ export const Form = ({ gratitudeSize, setGratitudes, clearGratitudes }) => {
 		setInput('');
 	};
 
-	const ClearButton = () => {
-		return (
-			<IconContext.Provider value={{ color: 'black', className: 'global-class-name', size: '2rem' }}>
-				<ExitButtonWrapper onClick={() => openModal()}>
-					<BsTrashFill />
-				</ExitButtonWrapper>
-			</IconContext.Provider>
-		);
-	};
-
 	return (
 		<FormWrapper onSubmit={(e) => handleSubmit(e)}>
-			<ClearButton />
 			<Modal isOpen={isOpen} closeModal={closeModal} openModal={openModal} clearGratitudes={clearGratitudes}>
 				Are you sure you want to delete all of the gratitudes?
 			</Modal>
+
 			<InputField
 				type="text"
 				name="user-input"
@@ -57,20 +45,39 @@ export const Form = ({ gratitudeSize, setGratitudes, clearGratitudes }) => {
 				value={input}
 				onChange={(e) => handleChange(e)}
 			/>
-			<SubmitButton type="submit" name="submit" disabled={input === '' ? true : false} />
+			<ButtonsWrapper>
+				<Clear
+					type="reset"
+					onClick={(e) => {
+						e.preventDefault();
+						openModal();
+					}}
+					disabled={gratitudeSize === 0 ? true : false}
+				>
+					Clear
+				</Clear>
+				<SubmitButton type="submit" name="submit" disabled={input === '' ? true : false} />
+			</ButtonsWrapper>
 		</FormWrapper>
 	);
 };
 
-const FormWrapper = styled.form`display: flex;`;
-
-const ExitButtonWrapper = styled.article`
+const FormWrapper = styled.form`
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	svg:hover {
-		fill: red !important;
-		stroke: red !important;
+	flex-direction: column;
+	align-items: stretch;
+	@media (max-width: 768px) {
+		align-items: center;
+	}
+	@media (max-width: 768px) {
+		svg {
+			height: 1.5rem;
+			width: 1.5rem;
+			margin-bottom: 4%;
+		}
+		article {
+			align-self: flex-start;
+		}
 	}
 `;
 
@@ -78,20 +85,64 @@ const InputField = styled.input`
 	padding: 0.5rem 1rem;
 	border: normal solid rgb(89, 89, 89);
 	border-radius: 4px;
+	display: block;
+	border: 3px solid black;
+	@media (max-width: 768px) {
+		width: 300px;
+	}
+`;
+
+const ButtonsWrapper = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 4%;
+	width: 100%;
+	gap: 10%;
+	@media (max-width: 768px) {
+		justify-content: space-around;
+	}
 `;
 
 const SubmitButton = styled.input`
-	width: fit-content;
+	width: 40%;
 	height: 50px;
 	padding: 1rem 2rem;
 	border-radius: 4px;
 	background-color: rgb(70, 97, 70);
-	border: normal solid rgb(70, 97, 70);
 	font-weight: bold;
+	border: 3px solid black;
 	&:hover {
 		transform: scale(105%);
 	}
 	&:disabled {
 		cursor: not-allowed;
+	}
+	@media (max-width: 768px) {
+		margin-top: 3%;
+		width: 100%;
+		font-size: 0.8rem;
+	}
+`;
+
+const Clear = styled.button`
+	width: 40%;
+	height: 50px;
+	padding: 1rem 2rem;
+	border-radius: 4px;
+	background-color: rgb(145, 48, 37);
+	border: normal solid rgb(70, 97, 70);
+	font-weight: bold;
+	border: 3px solid black;
+	&:hover {
+		transform: scale(105%);
+	}
+	&:disabled {
+		cursor: not-allowed;
+	}
+	@media (max-width: 768px) {
+		margin-top: 3%;
+		width: 100%;
+		font-size: 0.8rem;
 	}
 `;
