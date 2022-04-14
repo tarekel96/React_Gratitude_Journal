@@ -17,7 +17,9 @@ export const Modal = ({ children, isOpen, closeModal, clearGratitudes }) => {
 					</ModalCloseWrapper>
 					<ModalContent>{children}</ModalContent>
 					<ButtonsContainer>
-						<CancelButton onClick={() => handleCancel()}>Cancel</CancelButton>
+						<CancelButton autoFocus={'autoFocus'} onClick={() => handleCancel()}>
+							Cancel
+						</CancelButton>
 						<ConfirmButton onClick={() => handleConfirm()}>Confirm</ConfirmButton>
 					</ButtonsContainer>
 				</ModalWrapper>
@@ -51,6 +53,7 @@ const ModalWrapper = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	z-index: 100;
 `;
 
 const ModalCloseWrapper = styled.span`
@@ -77,6 +80,9 @@ const ButtonsContainer = styled.div`
 	justify-content: space-between;
 	width: 60%;
 	margin: 0 auto;
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 `;
 
 const CancelButton = styled.button`
@@ -85,8 +91,8 @@ const CancelButton = styled.button`
 	padding: 1rem 2rem;
 	border-radius: 4px;
 	background-color: rgb(145, 48, 37);
-	border: normal solid rgb(70, 97, 70);
 	font-weight: bold;
+	border: 3px solid black;
 	&:hover {
 		transform: scale(105%);
 	}
@@ -101,8 +107,8 @@ const ConfirmButton = styled.button`
 	padding: 1rem 2rem;
 	border-radius: 4px;
 	background-color: rgb(70, 97, 70);
-	border: normal solid rgb(70, 97, 70);
 	font-weight: bold;
+	border: 3px solid black;
 	&:hover {
 		transform: scale(105%);
 	}
