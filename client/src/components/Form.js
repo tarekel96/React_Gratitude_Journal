@@ -88,6 +88,9 @@ const InputField = styled.input`
 	display: block;
 	border: 3px solid black;
 	@media (max-width: 768px) {
+		&::placeholder {
+			font-size: 0.6rem;
+		}
 		width: 300px;
 	}
 `;
