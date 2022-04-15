@@ -21,13 +21,14 @@ export const Form = ({ gratitudeSize, setGratitudes, clearGratitudes }) => {
 		e.preventDefault();
 		if (input === '') {
 			alert('Please enter a gratitude before submitting.');
-
 			return;
 		}
+		const newID = gratitudeSize;
 		const newGratitude = {
-			content: input
+			content: input,
+			id: newID
 		};
-		setGratitudes((prevLst) => [ newGratitude, ...prevLst ]);
+		setGratitudes((prevLst) => [ ...prevLst, newGratitude ]);
 		setInput('');
 	};
 

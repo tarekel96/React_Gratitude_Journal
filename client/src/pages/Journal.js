@@ -7,9 +7,10 @@ import { defaultData } from '../data/defaultData';
 const Journal = () => {
 	const [ gratitudes, setGratitudes ] = useState(defaultData);
 
-	const updateGratitudes = (id, content) => {
+	const updateGratitudes = (id) => {
 		let copyGratitudes = [ ...gratitudes ];
-		copyGratitudes = copyGratitudes.filter((i) => i.id !== id && i.content !== content);
+		copyGratitudes = copyGratitudes.filter((i) => i.id !== id);
+		console.log(copyGratitudes);
 		setGratitudes(copyGratitudes);
 	};
 
@@ -27,7 +28,7 @@ const Journal = () => {
 			<GratitudesWrapper>
 				{gratitudes.map((gratitude, index) => (
 					<Gratitude
-						id={index}
+						id={gratitude.id}
 						content={gratitude.content}
 						key={gratitude + ' ' + String(gratitude.id)}
 						updateGratitudes={updateGratitudes}

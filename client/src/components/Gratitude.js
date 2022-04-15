@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const Gratitude = ({ content = 'I will pass my final exams!', id, updateGratitudes }) => {
-	const handleClick = (id, content) => updateGratitudes(id, content);
+	const handleClick = (id) => updateGratitudes(id);
 	return (
 		<GratitudeWrapper>
 			<p>{content}</p>
-			<XButton id={id} onClick={(e) => handleClick(id, content)}>
+			<XButton id={id} onClick={(e) => handleClick(id)}>
 				&times;
 			</XButton>
 		</GratitudeWrapper>
